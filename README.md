@@ -1,176 +1,128 @@
-# 📝🕒✨ Card Memo Panel (Anki Add-on)
+# 🧠 Anki Memo Timeline
 
-**Card Memo Panel** lets you attach quick memos to your cards while you study—then view **all memos across your entire collection** in a clean, scrollable **global timeline**.
-
-It’s designed to run *alongside* normal reviews: keep studying, jot notes fast, and find them later.
-
----
-
-## 🌟 Key Features
-
-### ✅ Save memos per note (stored inside the note)
-- Memos are saved as JSON into a dedicated field:
-  - **`_MemoLog`**
-- Each memo entry stores:
-  - timestamp (`ts`)
-  - text (`text`)
-
-### 🧭 Global Memo Timeline (all notes)
-- Displays **every memo from every note** in one timeline list
-- Inserts a **date header** for each day (date only; no time)
-- Double-click a memo → opens **Browser** and jumps to the note
-
-### 🔎 Filters
-Filter timeline by:
-- **All**
-- **Today**
-- **Last 7 days**
-- **Last 30 days**
-- **Custom range (From / To)**
-
-### ✍️ Add memos while reviewing
-- Bottom input area adds a memo to the **current Reviewer card**
-- Shortcut:
-  - **Ctrl+Enter** / **Ctrl+Return** → add memo
-
-### 🗑️ Edit / Delete memos
-- Right-click a memo entry:
-  - **Edit this memo**
-  - **Delete this memo**
-- Or select a memo and press:
-  - **Delete** key → delete memo
-
-### 📤 Export
-Export the currently-filtered timeline:
-- **Export TXT**
-- **Export HTML**
-
-### 🔍 Zoom (font size)
-In the memo list or input box:
-- **Ctrl + mouse wheel** (or **⌘ + wheel** on macOS) to change font size
-- Range: 8–24 pt
+**Anki Memo Timeline** is an add-on that visualizes your study history over time as a **scrollable timeline**, highlighting your review activity, new cards, lapses, and study trends.  
+It helps you **see patterns, track consistency, and understand long-term review behavior** at a glance.
 
 ---
 
-## 🚀 How to Use
+## 🔗 AnkiWeb Page
 
-### 1) Add the required field to your note type
-This add-on requires your note type to have a text field named:
+This add-on is officially published on **AnkiWeb**:
 
-- **`_MemoLog`**
+👉 https://ankiweb.net/shared/info/2117859718
 
-If it’s missing, you’ll see a warning telling you to add it.
-
-**How to add it:**
-1. Open Anki
-2. Go to **Tools → Manage Note Types**
-3. Select your note type
-4. Click **Fields…**
-5. Add a new field named exactly: **`_MemoLog`**
-6. Save
-
-> The add-on won’t create the field automatically—this is intentional for safety.
+Installing from AnkiWeb is recommended for the easiest setup and automatic updates.
 
 ---
 
-### 2) Open the panel
-Menu:
-- **Tools → Open Card Memo Panel**
+## 🎯 Why Use Memo Timeline?
 
-Shortcut:
-- **Ctrl+Shift+M**
+Anki provides statistics, but sometimes you need more:
 
-The panel is a standalone window. Closing it hides it (so it opens quickly next time).
+- 📅 **Visual study history** — daily and weekly patterns  
+- 📈 Identify days with low or high activity  
+- 🔎 Spot long gaps or bursts of reviews  
+- ⏱ Understand how your study habits evolve over time
 
----
-
-### 3) Add a memo during review
-1. Review normally
-2. Open the panel (Ctrl+Shift+M)
-3. Type a memo in the bottom box
-4. Click **Add memo** (or press **Ctrl+Enter**)
-
-The memo is stored inside the current note’s `_MemoLog` field.
+It’s like a personal study diary, built into Anki.
 
 ---
 
-## 🧠 How the data is stored
+## 📦 Installation
 
-### Per-note storage
-Each note’s `_MemoLog` contains a JSON list, like:
+### 📥 From AnkiWeb (Recommended)
 
-```json
-[
-  {"ts": 1765800000, "text": "remember: K+ increases with acidosis"},
-  {"ts": 1765801200, "text": "CT finding: hyperdense MCA sign"}
-]
-```
+1. Open **Anki**
+2. Go to **Tools → Add-Ons → Browse & Install**
+3. Search for **Anki Memo Timeline**
+4. Install and restart Anki
 
-### Global timeline
-On load, the add-on searches for notes that contain `_MemoLog:*` and collects all entries into one list.
+### 📁 Manual Installation (GitHub)
 
-To keep the UI responsive, it loads using **QueryOp** (background task + progress dialog).
+1. Clone or download this repository
+2. Place it into:
+   `Anki2/addons21/anki-memo-timeline`
+3. Restart Anki
 
 ---
 
-## ⚙️ Configuration
+## 🚀 How It Works
 
-### `max_display_memos`
-The add-on supports a simple config key:
+Once installed:
 
-- `max_display_memos` (default: `500`)
+1. Open **Tools → Anki Memo Timeline**
+2. A new window shows your review history as a **timeline chart**
+3. Scroll or zoom to explore:
+   - Review quantity per day
+   - New cards vs reviews
+   - Lapses
+   - Streaks and gaps
 
-If the filtered list is longer than this, it only shows the most recent items (newer memos prioritized).
+You can use it to:
+- Check *how consistent* you’ve been
+- See *study bursts* before exams
+- Compare months or weeks visually
+
+---
+
+## 📊 Timeline Features
+
+- **Daily summary** of reviews
+- **Color-coded events** (new / review / lapse)
+- **Zoom / scroll interaction**
+- **Tooltip details** when hovering on events
+- Optional configuration for display preferences
+
+---
+
+## ⚙️ Customization
 
 Open:
-- **Tools → Add-ons → Card Memo Panel → Config**
 
-Example:
-```json
-{
-  "max_display_memos": 500
-}
-```
+**Tools → Add-Ons → Anki Memo Timeline → Config**
 
----
+Common options include:
 
-## 🎨 UI Notes
-
-This add-on uses a “messaging app” style UI:
-- soft background
-- rounded memo list
-- colored date headers
-- primary/ghost buttons
-
-It also disables horizontal scrolling for cleaner reading.
+- Date range to display
+- Colors for event types
+- Chart height / layout
+- Whether to include future scheduled reviews
+- Tooltip formatting
 
 ---
 
-## 🛠️ Troubleshooting
+## 🛠 Troubleshooting
 
-### “This note type does not have _MemoLog field”
-Add `_MemoLog` to the note type fields (see Quick Start).
-
-### Panel shows “No card”
-You opened the panel while not reviewing a card.  
-Start a review, then open the panel again.
-
-### Export says there are no memos
-Your current filter has no matches. Switch filter to **All** or widen the date range.
-
-### Performance feels slow on first open
-The first open loads memo data from the whole collection. After that, it stays cached while the panel is open.
+| Issue | Solution |
+|-------|----------|
+| No data shown | Make sure you’ve reviewed cards before |
+| Errors on load | Restart Anki and confirm installation path |
+| Timeline too crowded | Adjust date range in config |
+| Performance slow | Reduce chart height or time span |
 
 ---
 
-## 🔒 Privacy
+## 💡 Tips for Best Use
 
-- No AI
-- No network calls
-- All memos stay inside your Anki collection
+- Open the timeline after a study session to see the latest activity
+- Use it to set weekly study goals
+- Combine with Anki statistics for deeper insight
 
 ---
 
 ## 📜 License
 
-See `LICENSE` in this repository.
+MIT License
+
+---
+
+## 🔧 Related Add-Ons
+
+These tools help you understand and improve your study workflow:
+
+- **AI Card Explainer**
+- **AI Card Splitter**
+- **AI Card Translator**
+- **HTML Exporter for Anki**
+
+They complement each other for smarter, more visual learning.
